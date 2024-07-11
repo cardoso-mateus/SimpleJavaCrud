@@ -1,0 +1,6 @@
+Pessoa {"id": "0", "nome": "", "idade": "30", "email": "", "cidade": "joaozinho@gmail.com"}
+
+Pessoa {"id": "0", "nome": "João", "idade": "40", "email": "jozaozinho@gmail.com", "cidade": "Barueri"}
+
+Pessoa {"id": "0", "nome": "Clara", "idade": "15", "email": "clarinha@hotmail.com", "cidade": "Santos"}
+
