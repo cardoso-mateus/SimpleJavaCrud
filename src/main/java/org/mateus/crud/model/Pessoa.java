@@ -2,6 +2,9 @@ package org.mateus.crud.model;
 
 import java.util.UUID;
 
+/***
+ * Essa classe representa uma pessoa com nome, idade, email e cidade, também será gerado um ID aleatório.
+ */
 public class Pessoa {
     private String id;
     private String nome;
@@ -9,6 +12,15 @@ public class Pessoa {
     private String email;
     private String cidade;
 
+    /***
+     * Construtor para inicialização, os parâmetros deverão ser inserido quando a classe for instanciada, porém,
+     * o ID será gerado automaticamente de forma aleatória.
+     *
+     * @param nome
+     * @param idade
+     * @param email
+     * @param cidade
+     */
     public Pessoa(String nome, int idade, String email, String cidade) {
         this.id = idGenerator();
         this.nome = nome;
@@ -17,10 +29,14 @@ public class Pessoa {
         this.cidade = cidade;
     }
 
+    /***
+     * Método para geração de ID aleatório.
+     *
+     * @return O ID da pessoa que será um UUID tipo 4 (gerado de forma pseudo aleatória).
+     */
     private String idGenerator() {
         UUID idTwo = UUID.randomUUID();
-        String id = String.valueOf(idTwo);
-        return id;
+        return idTwo.toString();
     }
 
     public String getId() {
@@ -51,6 +67,11 @@ public class Pessoa {
         this.cidade = cidade;
     }
 
+    /***
+     * Retorna uma representação textual do objeto Pessoa usando como base o formato JSON.
+     *
+     * @return String representativa do objeto.
+     */
     @Override
     public String toString() {
         return """
