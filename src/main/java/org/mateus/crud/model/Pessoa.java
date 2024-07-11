@@ -1,25 +1,30 @@
 package org.mateus.crud.model;
 
+import java.util.UUID;
+
 public class Pessoa {
-    private int id;
+    private String id;
     private String nome;
     private int idade;
     private String email;
     private String cidade;
 
     public Pessoa(String nome, int idade, String email, String cidade) {
-        this.id = id;
+        this.id = idGenerator();
         this.nome = nome;
         this.idade = idade;
         this.email = email;
         this.cidade = cidade;
     }
 
-    public int getId() {
+    private String idGenerator() {
+        UUID idTwo = UUID.randomUUID();
+        String id = String.valueOf(idTwo);
         return id;
     }
-    public void setId(int id) {
-        this.id = id;
+
+    public String getId() {
+        return id;
     }
     public String getNome() {
         return nome;
@@ -49,7 +54,7 @@ public class Pessoa {
     @Override
     public String toString() {
         return """
-               Pessoa {"id": "%d", "nome": "%s", "idade": "%d", "email": "%s", "cidade": "%s"}
+               Pessoa {"id": "%s", "nome": "%s", "idade": "%d", "email": "%s", "cidade": "%s"}
                """.formatted(id, nome, idade, email, cidade);
     }
 }
