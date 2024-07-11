@@ -1,6 +1,6 @@
 package org.mateus.crud;
 
-import org.mateus.model.crud.Pessoa;
+import org.mateus.crud.model.Pessoa;
 
 public class Main {
   public static void main(String[] args) {
