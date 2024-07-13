@@ -1,5 +1,6 @@
 package org.mateus.crud.service;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.mateus.crud.model.Pessoa;
 
@@ -7,6 +8,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Executable;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -34,9 +36,6 @@ public class PessoaService {
         }
     }
 
-    /***
-     * Este método faz a leitura do arquivo texto onde serão registradas as pessoas.
-     */
     public void listarPessoas() {
         try {
             carregarPessoas().forEach(System.out::println);
@@ -51,9 +50,11 @@ public class PessoaService {
             String conteudo = Files.readString(path);
             conteudo = conteudo.substring(0, conteudo.length() - 3);
             builder.append("[%s]".formatted(conteudo));
-            return mapper.readValue(new File(FILE_PATH), List.class);
-        } catch (IOException e) {
-            throw new Exception("Arquivo inexitente no diretório.");
+            String jsonFormatado = builder.toString();
+            var listaPessoas = mapper.readValue(jsonFormatado, new TypeReference<List<Pessoa>>(){});
+            return listaPessoas;
+        } catch (Exception e) {
+            throw new Exception("Arquivo inexistente no diretório.");
         }
     }
 }
