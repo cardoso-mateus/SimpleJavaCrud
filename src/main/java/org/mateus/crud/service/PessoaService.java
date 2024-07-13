@@ -52,7 +52,7 @@ public class PessoaService {
             var listaPessoas = mapper.readValue(jsonFormatado, new TypeReference<List<Pessoa>>(){});
             return listaPessoas;
         } catch (Exception e) {
-            throw new Exception("Arquivo inexistente no diretório.");
+            throw new Exception(e.getMessage());
         }
     }
 }
