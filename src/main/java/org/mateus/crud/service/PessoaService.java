@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 /***
@@ -25,8 +26,8 @@ public class PessoaService {
      *
      * @param pessoa
      */
-    public void registrarPessoas(Pessoa pessoa) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, true))) {
+    public void registrarPessoa(Pessoa pessoa, boolean bool) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, bool))) {
             writer.write(pessoa.toString());
             writer.newLine();
         } catch (IOException e) {
@@ -34,7 +35,10 @@ public class PessoaService {
         }
     }
 
-    public void listarPessoas() {
+    /***
+     * Este método utiliza uma lista carregada de pessoas e escreve essa lista no console.
+     */
+    public void listarPessoa() {
         try {
             carregarPessoas().forEach(System.out::println);
         } catch (Exception e) {
@@ -42,6 +46,34 @@ public class PessoaService {
         }
     }
 
+    /***
+     * Este método carrega uma lista de pessoas, compara a ID da pessoa recebida pelo parâmetros e reescreve a lista de
+     * pessoas com exceção da pessoa que possui o ID passado no parâmetro.
+     *
+     * @param id
+     */
+    public void deletarPessoa(String id) {
+        try {
+            List<Pessoa> novaLista = new ArrayList<>();
+            for (Pessoa pessoa : carregarPessoas()) {
+                if (!pessoa.getId().equals(id)) {
+                    novaLista.add(pessoa);
+                }
+            }
+            sobrescrevePessoas(novaLista);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /***
+     * Método acessório.
+     * Este método lê todas as linhas do arquivo de texto que lista as pessoas e retorna um objeto List<Pessoa>, o processo
+     * é feito usando desserialização de JSON.
+     *
+     * @return List<Pessoa>
+     * @throws Exception
+     */
     private List<Pessoa> carregarPessoas() throws Exception {
         StringBuilder builder = new StringBuilder();
         try {
@@ -53,6 +85,23 @@ public class PessoaService {
             return listaPessoas;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
+        }
+    }
+
+    /***
+     * Método acessório.
+     * Este método é utilizado para reescrever a lista de pessoas no arquivo de texto quando uma pessoa da lista é deletada.
+     *
+     * @param pessoa
+     */
+    private void sobrescrevePessoas(List<Pessoa> pessoa) {
+        try {
+            registrarPessoa(pessoa.get(0), false);
+            for (int i = 1; i < pessoa.size(); i++) {
+                registrarPessoa(pessoa.get(i), true);
+            }
+        } catch (Exception e) {
+            System.err.println("Erro ao registrar pessoa: " + e.getMessage());
         }
     }
 }
