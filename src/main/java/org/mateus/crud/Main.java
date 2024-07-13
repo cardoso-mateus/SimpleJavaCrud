@@ -17,13 +17,14 @@ public class Main {
                   Escolha uma opção:
                   Opção 1: registrar uma pessoa;
                   Opção 2: listar pessoas registradas;
-                  Opção 3: sair.
+                  Opção 3: deletar uma pessoa;
+                  Opção 4: sair.
                   ***********************
                   """;
     System.out.println(tela);
     System.out.print("Insira uma opção: ");
 
-    while (opcao != 3) {
+    while (opcao != 4) {
       opcao = input.nextInt();
       input.nextLine();
 
@@ -39,19 +40,26 @@ public class Main {
           System.out.print("Insira o cidade: ");
           String cidade = input.nextLine();
           Pessoa pessoa = new Pessoa(nome, idade, email, cidade);
-          pessoaService.registrarPessoas(pessoa);
+          pessoaService.registrarPessoa(pessoa, true);
           System.out.println("Pessoa registrada com sucesso.");
           System.out.println(tela);
           break;
         case 2:
-          pessoaService.listarPessoas();
+          pessoaService.listarPessoa();
           System.out.println(tela);
           break;
         case 3:
+          System.out.println("Insira o ID da pessoa a ser deletada: ");
+          String id = input.nextLine();
+          pessoaService.deletarPessoa(id);
+          System.out.println("Pessoa deletada com sucesso!");
+          System.out.println(tela);
+          break;
+        case 4:
           System.out.println("Saindo...");
           break;
         default:
-          System.out.println("Opção inválida, digite uma opção entre 1 e 3.");
+          System.out.println("Opção inválida, digite uma opção entre 1 e 4.");
       }
     }
     input.close();
