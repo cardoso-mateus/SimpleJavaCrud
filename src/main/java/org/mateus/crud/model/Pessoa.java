@@ -28,6 +28,7 @@ public class Pessoa {
         this.email = email;
         this.cidade = cidade;
     }
+    public Pessoa() {}
 
     /***
      * Método para geração de ID aleatório.
