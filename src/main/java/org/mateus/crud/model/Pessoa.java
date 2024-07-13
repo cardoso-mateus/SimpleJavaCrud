@@ -75,7 +75,6 @@ public class Pessoa {
     @Override
     public String toString() {
         return """
-               Pessoa {"id": "%s", "nome": "%s", "idade": "%d", "email": "%s", "cidade": "%s"}
-               """.formatted(id, nome, idade, email, cidade);
+               {"id": "%s", "nome": "%s", "idade": "%d", "email": "%s", "cidade": "%s"},""".formatted(id, nome, idade, email, cidade);
     }
 }
