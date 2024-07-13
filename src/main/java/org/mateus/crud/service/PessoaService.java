@@ -39,25 +39,14 @@ public class PessoaService {
      */
     public void listarPessoas() {
         try {
-            carregarPessoas();
+            carregarPessoas().forEach(System.out::println);
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
-        }
-
-        if (Files.exists(path)) {
-            try {
-                Files.lines(path).forEach(System.out::println);
-            } catch (IOException e) {
-                System.err.println("Erro ao ler arquivo de pessoas: " + e.getMessage());
-            }
-        } else {
-            System.out.println("Nenhuma pessoa registrada ainda.");
         }
     }
 
     private List<Pessoa> carregarPessoas() throws Exception {
         StringBuilder builder = new StringBuilder();
-
         try {
             String conteudo = Files.readString(path);
             conteudo = conteudo.substring(0, conteudo.length() - 3);
