@@ -202,3 +202,7 @@ gradle-app.setting
 # End of https://www.toptal.com/developers/gitignore/api/intellij+all,eclipse,maven,gradle
 SquareX Safe File Viewer
 ✕
+*.txt
+*.class
+*.lst
+*.jar
