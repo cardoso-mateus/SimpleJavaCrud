@@ -1,9 +1,8 @@
 package org.mateus.crud;
 
+import java.util.Scanner;
 import org.mateus.crud.model.Pessoa;
 import org.mateus.crud.service.PessoaService;
-
-import java.util.Scanner;
 
 public class Main {
   public static void main(String[] args) {
